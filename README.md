@@ -106,3 +106,11 @@ FROM produtos
 WHERE preco > 100.00
 ORDER BY preco ASC, nome ASC;
 ```
+
+### 4. Liste todos os ids e preços de produtos cujo preço seja maior do que a média de todos os preços encontrados na tabela "produtos".
+
+```sql
+SELECT id, preco
+FROM produtos
+WHERE preco > (SELECT AVG(preco) FROM produtos);
+```
