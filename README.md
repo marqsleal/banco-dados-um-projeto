@@ -68,3 +68,41 @@ Relação Cliente(1,N) - Contrata - (N,1) Produto. Um cliente pode contratar vá
 - **Diretor_Responsavel (1:N)** - **Produto (N:1)**
   - Um **Diretor_Responsavel** pode ser responsável por vários **Produtos**.
   - Um **Produto** tem apenas um **Diretor_Responsavel**.
+
+## Consultas SQL simples e complexas em um banco de dados relacional 
+
+Um exemplo de modelo de banco de dados com relacionamento muitos-para-muitos pode ser o de um
+e-commerce que tem produtos e categorias, onde um produto pode pertencer a várias categorias e uma
+categoria pode estar associada a vários produtos. Nesse caso, teríamos duas tabelas: "produtos" e
+"categorias", com uma tabela intermediária "produtos_categorias" para relacionar os produtos às suas
+categorias.
+
+```sql
+CREATE TABLE produtos (
+id INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(100) NOT NULL,
+preco DECIMAL(10, 2) NOT NULL
+);
+CREATE TABLE categorias (
+id INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(100) NOT NULL
+);
+CREATE TABLE produtos_categorias (
+produto_id INTEGER REFERENCES produtos(id),
+categoria_id INTEGER REFERENCES categorias(id)
+);
+```
+
+Assim, usando o subconjunto da "structured query language" chamado de DQL, produza consultas de modo a
+atender cada uma das seguintes solicitações:  
+
+### Perguntas:
+
+### 3. Liste os nomes de todos os produtos que custam mais de 100 reais, ordenando-os primeiramente pelo preço e em segundo lugar pelo nome. Use alias para mostrar o nome da coluna nome como "Produto" e da coluna preco como "Valor". A resposta da consulta não deve mostrar outras colunas de dados.
+
+```sql
+SELECT nome AS Produto, preco AS Valor
+FROM produtos
+WHERE preco > 100.00
+ORDER BY preco ASC, nome ASC;
+```
