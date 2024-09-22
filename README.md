@@ -114,3 +114,28 @@ SELECT id, preco
 FROM produtos
 WHERE preco > (SELECT AVG(preco) FROM produtos);
 ```
+
+### 5. Para cada categoria, mostre o preço médio do conjunto de produtos a ela associados. Caso uma categoria não tenha nenhum produto a ela associada, esta categoria não deve aparecer no resultado final. A consulta deve estar ordenada pelos nomes das categorias.
+
+```sql
+SELECT categorias.nome AS Categoria, AVG(produtos.preco) AS Preco_Medio
+FROM categorias
+INNER JOIN produtos_categorias ON categorias.id = produtos_categorias.categoria_id
+INNER JOIN produtos ON produtos_categorias.produto_id = produtos.id
+GROUP BY categorias.nome
+ORDER BY categorias.nome ASC;
+```
+
+## Inserções, alterações e remoções de objetos e dados em um banco de dados relacional
+
+Você está participando de um processo seletivo para trabalhar como cientista de dados na Ada, uma das maiores formadoras do país em áreas correlatadas à tecnologia. Dividido em algumas etapas, o processo tem o objetivo de avaliar você nos quesitos Python, Machine Learning e Bancos de Dados. Ainda que os dois primeiros sejam o cerne da sua atuação no dia-a-dia, considera-se que Bancos de Dados também constituem um requisito importante e, por isso, esta etapa pode ser a oportunidade que você precisava para se destacar dentre os seus concorrentes, demonstrando um conhecimento mais amplo do que os demais.
+
+### 6. Com o objetivo de demonstrar o seu conhecimento através de um exemplo contextualizado com o dia-a-dia da escola, utilize os comandos do subgrupo de funções DDL para construir o banco de dados simples abaixo, que representa um relacionamento do tipo 1,n entre as entidades "aluno" e "turma":
+
+**Tabela 1**
+Nome da tabela: aluno
+Colunas da tabela: id_aluno (INT), nome_aluno (VARCHAR), aluno_alocado (BOOLEAN), id_turma (INT)
+
+**Tabela 2**
+Nome da tabela: turma
+Colunas da tabela: id_turma (INT), código_turma (VARCHAR), nome_turma (VARCHAR)
