@@ -157,3 +157,39 @@ CREATE TABLE aluno (
     FOREIGN KEY (id_turma) REFERENCES turma(id_turma)
 );
 ```
+
+### 7. Agora que você demonstrou que consegue ser mais do que um simples usuário do banco de dados, mostre separadamente cada um dos códigos DML necessários para cumprir cada uma das etapas a seguir:
+
+a. Inserir pelo menos duas turmas diferentes na tabela de turma;
+
+```sql
+INSERT INTO turma (codigo_turma, nome_turma)
+VALUES ('TURMA01', 'Matemática 101'),
+       ('TURMA02', 'Ciências 101');
+```
+
+b. Inserir pelo menos 1 aluno alocado em cada uma destas turmas na tabela aluno (todos com NULL na coluna aluno_alocado);
+
+```sql
+INSERT INTO aluno (nome_aluno, aluno_alocado, id_turma)
+VALUES ('Carlos Silva', NULL, (SELECT id_turma FROM turma WHERE codigo_turma = 'TURMA01')),
+       ('Ana Santos', NULL, (SELECT id_turma FROM turma WHERE codigo_turma = 'TURMA02'));
+```
+
+c. Inserir pelo menos 2 alunos não alocados em nenhuma turma na tabela aluno (todos com NULL na coluna aluno_alocado);
+
+```sql
+INSERT INTO aluno (nome_aluno, aluno_alocado, id_turma)
+VALUES ('João Pereira', NULL, NULL),
+       ('Maria Souza', NULL, NULL);
+```
+
+d. Atualizar a coluna aluno_alocado da tabela aluno, de modo que os alunos associados a uma disciplina recebam o valor True e alunos não associdos a nenhuma disciplina recebam o falor False para esta coluna.
+
+```sql
+UPDATE aluno
+SET aluno_alocado = CASE
+    WHEN id_turma IS NOT NULL THEN TRUE
+    ELSE FALSE
+END;
+```
