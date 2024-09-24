@@ -137,10 +137,12 @@ Nome da tabela: aluno
 Colunas da tabela: id_aluno (INT), nome_aluno (VARCHAR), aluno_alocado (BOOLEAN), id_turma (INT)
 
 ```sql
-CREATE TABLE turma (
-    id_turma INT PRIMARY KEY AUTO_INCREMENT,
-    codigo_turma VARCHAR(50) NOT NULL,
-    nome_turma VARCHAR(100) NOT NULL
+CREATE TABLE aluno (
+    id_aluno INT PRIMARY KEY AUTO_INCREMENT,
+    nome_aluno VARCHAR(100) NOT NULL,
+    aluno_alocado BOOLEAN DEFAULT FALSE,
+    id_turma INT,
+    FOREIGN KEY (id_turma) REFERENCES turma(id_turma)
 );
 ```
 
@@ -149,12 +151,10 @@ Nome da tabela: turma
 Colunas da tabela: id_turma (INT), código_turma (VARCHAR), nome_turma (VARCHAR)
 
 ```sql
-CREATE TABLE aluno (
-    id_aluno INT PRIMARY KEY AUTO_INCREMENT,
-    nome_aluno VARCHAR(100) NOT NULL,
-    aluno_alocado BOOLEAN DEFAULT FALSE,
-    id_turma INT,
-    FOREIGN KEY (id_turma) REFERENCES turma(id_turma)
+CREATE TABLE turma (
+    id_turma INT PRIMARY KEY AUTO_INCREMENT,
+    codigo_turma VARCHAR(50) NOT NULL,
+    nome_turma VARCHAR(100) NOT NULL
 );
 ```
 
